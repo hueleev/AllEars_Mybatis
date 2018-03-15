@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+	
+<mapper namespace="ldg.mybatis">
+
+
+		<select id="songList"	resultType="Song"
+		parameterType="hashmap">
+				select * from songboard
+			<if test="snum!=null">
+				WHERE snum = #{snum}
+			</if>
+		</select>
+		
+<!-- 		
+		<select id="getNextNumber"	resultType="int" >
+			select boardser.nextval from dual
+		</select>
+		
+		
+	 -->
+		
+	
+		
+		
+		
+		
+		
+		
+</mapper>
+
