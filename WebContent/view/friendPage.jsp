@@ -97,7 +97,7 @@ function unfollow(x) {
          
          <p class="w3-center">
          	
-         	<button onclick="document.getElementById('follower').style.display='block'" class="w3-btn w3-round"><i class="fa fa-users w3-large w3-margin-right"></i>팔로잉 ${follower}</button>
+         	<button onclick="document.getElementById('follower').style.display='block'" class="w3-btn w3-round"><i class="fa fa-users w3-large w3-margin-right"></i>팔로워 ${follower}</button>
 				  <div id="follower" class="w3-modal">
 				    <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:25%">
 				      <div class="w3-container">

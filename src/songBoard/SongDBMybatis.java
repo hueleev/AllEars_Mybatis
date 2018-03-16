@@ -25,6 +25,19 @@ public class SongDBMybatis extends MybatisConnector {
 
 	
 	SqlSession sqlSession;
+	
+	public List getPage(String sboardid) {
+		sqlSession = sqlSession();
+		Map map = new HashMap();
+		map.put("sboardid", sboardid);
+
+		
+		List li = sqlSession.selectList(namespace+".getPage",map);
+		sqlSession.close();
+		
+		return li;		
+		
+	}
 
 
 	

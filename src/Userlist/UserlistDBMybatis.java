@@ -185,7 +185,6 @@ public class UserlistDBMybatis extends MybatisConnector {
 		
 		List li = sqlSession.selectList(namespace+".getUsers",map);
 		sqlSession.close();
-		
 		return li;
 	}
 	
@@ -199,6 +198,117 @@ public class UserlistDBMybatis extends MybatisConnector {
 		return number;
 	}
 	
+	public UserlistDataBean getUser(int num,String chk) {
+		sqlSession = sqlSession();
+		Map map = new HashMap();
+		map.put("num", num);
+		map.put("chk", chk);
+		
+		UserlistDataBean user = sqlSession.selectOne(namespace+".getUser",map);
+		sqlSession.close();
+		
+		return user;
+		
+		
+	}
+	
+	public int deleteUser(String userid,String passwd) throws Exception {
+		sqlSession = sqlSession();
+		Map map = new HashMap();
+		map.put("userid", userid);
+		map.put("passwd", passwd);
+
+		int chk=sqlSession.delete(namespace+".deleteUser",map);
+		
+	
+		if (chk==1) {
+			int chk2=sqlSession.delete(namespace+".deleteFollow",map);
+			
+		}
+		
+		sqlSession.commit();
+		sqlSession.close();
+		
+		return chk;
+		
+	}
+	
+	public int deleteUser2(String userid,String passwd) throws Exception {
+		sqlSession = sqlSession();
+		Map map = new HashMap();
+		map.put("userid", userid);
+		map.put("passwd", passwd);
+
+	
+		int chk=sqlSession.delete(namespace+".deleteUser2",map);
+		
+		if (chk==1) {
+			int chk2=sqlSession.delete(namespace+".deleteFollow",map);
+			
+		}
+		sqlSession.commit();
+		sqlSession.close();
+		
+		return chk;
+		
+		
+	}
+	
+	public int updateUser(UserlistDataBean user) {
+		
+		sqlSession = sqlSession();
+		int chk = sqlSession.update(namespace+".updateUser",user);
+		sqlSession.commit(); 
+		sqlSession.close();
+		
+		return chk;
+		
+	}
+	
+	public boolean followchk(String sessionid, String userid) {
+		sqlSession = sqlSession();
+		Map map = new HashMap();
+		map.put("myid", sessionid);
+		map.put("friendid", userid);
+
+		boolean li=true;
+			
+		Map<String,String> map2=sqlSession.selectOne(namespace+".followchk",map);
+		
+		if (map2!=null) {
+			li=true;
+		}else {
+			li=false;
+		}
+	
+		return li;
+	}
+	
+	public boolean follow(String sessionid, String userid) {
+		
+		boolean chk=followchk(sessionid,userid);
+		sqlSession = sqlSession();
+		Map map = new HashMap();
+		map.put("myid", sessionid);
+		map.put("friendid", userid);
+		boolean li=true;
+		int chk2;
+		
+		if(chk) {
+			chk2=sqlSession.delete(namespace+".unfollow",map);
+			li=false;
+			
+		}else {
+			chk2=sqlSession.insert(namespace+".follow",map);
+			li=true;
+		}
+		
+		sqlSession.commit();
+		sqlSession.close();
+		
+		return li;
+		
+	}
 /*	public BoardDataBean getArticle
 	(int num , String boardid, String chk) {
 		

@@ -48,6 +48,47 @@ public class EtcinfoDBMybatis extends MybatisConnector {
 		return li;
 		
 	}
-
 	
+	public boolean chkid(String etcid){
+		sqlSession = sqlSession();
+		Map map = new HashMap();
+		map.put("etcid", etcid);
+		Map map2=sqlSession.selectOne(namespace+".chkid",map);
+		boolean li=false;
+		if (map2!=null) {
+			li=true;
+		}
+		
+		sqlSession.close();
+		
+		return li;	
+	}
+	
+	public void insertEtc(EtcinfoDataBean etc) {
+		
+		sqlSession = sqlSession();
+		sqlSession.insert(namespace+".insertEtc",etc);
+		sqlSession.commit(); 
+		sqlSession.close();
+	}
+	
+	public int updateEtc(EtcinfoDataBean etc) {
+		
+		sqlSession = sqlSession();
+		int chk = sqlSession.update(namespace+".updateEtc",etc);
+		sqlSession.commit(); 
+		sqlSession.close();
+		
+		return chk;
+	}
+	
+	public int deleteImg(EtcinfoDataBean etc) {
+		
+		sqlSession = sqlSession();
+		int chk = sqlSession.update(namespace+".deleteImg",etc);
+		sqlSession.commit(); 
+		sqlSession.close();
+		
+		return chk;
+	}
 }

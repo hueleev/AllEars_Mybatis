@@ -259,7 +259,7 @@ import songBoard.SongDataBean;
 				pageNum = "1";	}
 		 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm");
 		 try { 
-			UserlistDBBean dbPro = UserlistDBBean.getInstance();
+			 UserlistDBMybatis dbPro = UserlistDBMybatis.getInstance();
 		 	UserlistDataBean user = dbPro.getUser(num,"content"); 
 		 
 		 	req.setAttribute("user", user); 	
@@ -279,7 +279,7 @@ import songBoard.SongDataBean;
 			int num=Integer.parseInt(req.getParameter("num"));
 			String pageNum = req.getParameter("pageNum");
 			
-			UserlistDBBean dbPro = UserlistDBBean.getInstance();
+			UserlistDBMybatis dbPro = UserlistDBMybatis.getInstance();
 		 	UserlistDataBean user = dbPro.getUser(num,"content"); 
 			
 		 	req.setAttribute("num", num);
@@ -289,6 +289,7 @@ import songBoard.SongDataBean;
 		
 			return  "/user/deleteForm.jsp"; 
 				}
+		
 		
 		public String deletePro(HttpServletRequest req,
 				 HttpServletResponse res)  throws Throwable { 
@@ -303,7 +304,7 @@ import songBoard.SongDataBean;
 			 int num = Integer.parseInt(req.getParameter("num"));
 			 String userid=req.getParameter("userid");
 			 String passwd = req.getParameter("passwd");
-			 UserlistDBBean dbPro = UserlistDBBean.getInstance();
+			 UserlistDBMybatis dbPro = UserlistDBMybatis.getInstance();
 
 			 int check = -1;
 	 
@@ -333,7 +334,6 @@ import songBoard.SongDataBean;
 					return  "/user/deletePro.jsp"; 
 
 				}
-
 			}else {
 				check=-1;
 			}
@@ -349,7 +349,7 @@ import songBoard.SongDataBean;
 				 HttpServletResponse res)  throws Throwable { 
 			
 			
-			UserlistDBBean dbPro = UserlistDBBean.getInstance();
+			UserlistDBMybatis dbPro = UserlistDBMybatis.getInstance();
 			
 			
 			
@@ -384,7 +384,7 @@ import songBoard.SongDataBean;
 	
 
 			 try{
-				 UserlistDBBean dbPro = UserlistDBBean.getInstance();
+				 UserlistDBMybatis dbPro = UserlistDBMybatis.getInstance();
 				 UserlistDataBean user = dbPro.getUser2(userid,passwd);
 
 				 req.setAttribute("user", user);
@@ -418,7 +418,7 @@ import songBoard.SongDataBean;
 			
 			
 			System.out.println(user);
-			UserlistDBBean dbPro = UserlistDBBean.getInstance();
+			UserlistDBMybatis dbPro = UserlistDBMybatis.getInstance();
 			int chk=dbPro.updateUser(user); 
 
 			req.setAttribute("user", user);
@@ -450,7 +450,7 @@ import songBoard.SongDataBean;
 			int count = 0;
 			int number = 0;
 			List userList = null;
-			UserlistDBBean dbPro = UserlistDBBean.getInstance();
+			UserlistDBMybatis dbPro = UserlistDBMybatis.getInstance();
 			count = dbPro.getUserCount();
 			if (count >0){
 				userList = dbPro.getUsers(startRow,endRow);}
@@ -494,9 +494,9 @@ import songBoard.SongDataBean;
 			 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm");
 			 
 			 try { 
-				UserlistDBBean dbPro = UserlistDBBean.getInstance();
+				UserlistDBMybatis dbPro = UserlistDBMybatis.getInstance();
 			 	UserlistDataBean user = dbPro.getUser(num,"content"); 
-			 	SongDBBean dbPro2=SongDBBean.getInstance();
+			 	SongDBMybatis dbPro2=SongDBMybatis.getInstance();
 			 	
 			 	HttpSession session=req.getSession();
 			 	System.out.println("===========1");
@@ -546,7 +546,7 @@ import songBoard.SongDataBean;
 			HttpSession session=req.getSession();
 		 	String sessionid=(String) session.getAttribute("sessionid");
 		 	
-			UserlistDBBean dbPro=UserlistDBBean.getInstance();
+			UserlistDBMybatis dbPro=UserlistDBMybatis.getInstance();
 			
 			boolean chkfollow=dbPro.follow(sessionid, userid);
 			
@@ -566,13 +566,13 @@ import songBoard.SongDataBean;
 			 String userid=(String) session.getAttribute("sessionid");
 			 String passwd=(String) session.getAttribute("sessionpasswd");
 			 
-			 UserlistDBBean dao = UserlistDBBean.getInstance();
+			 UserlistDBMybatis dao = UserlistDBMybatis.getInstance();
 			 UserlistDataBean user=dao.getUser2(userid,passwd);
 			 
-			 EtcinfoDBBean dao2=EtcinfoDBBean.getInstance();
+			 EtcinfoDBMybatis dao2=EtcinfoDBMybatis.getInstance();
 			 EtcinfoDataBean etc=dao2.getEtc(userid);
 			 
-			 SongDBBean dao3=SongDBBean.getInstance();
+			 SongDBMybatis dao3=SongDBMybatis.getInstance();
 			 
 			 
 			 int follow=dao.followCount(userid);
@@ -604,7 +604,7 @@ import songBoard.SongDataBean;
 			HttpSession session=req.getSession();
 			String etcid=(String) session.getAttribute("sessionid");
 			
-			EtcinfoDBBean dao=EtcinfoDBBean.getInstance();
+			EtcinfoDBMybatis dao=EtcinfoDBMybatis.getInstance();
 			
 			boolean chkid=dao.chkid(etcid);
 			
@@ -669,7 +669,7 @@ import songBoard.SongDataBean;
 				
 
 				System.out.println(etc);
-				EtcinfoDBBean dbPro = EtcinfoDBBean.getInstance(); 
+				EtcinfoDBMybatis dbPro = EtcinfoDBMybatis.getInstance(); 
 
 	
 				dbPro.insertEtc(etc);
@@ -726,7 +726,7 @@ import songBoard.SongDataBean;
 			
 			
 			System.out.println(etc);
-			EtcinfoDBBean dbPro = EtcinfoDBBean.getInstance();
+			EtcinfoDBMybatis dbPro = EtcinfoDBMybatis.getInstance();
 			
 			int chk=dbPro.updateEtc(etc); 
 
@@ -752,7 +752,7 @@ import songBoard.SongDataBean;
 			String name=req.getParameter("name");
 			
 			System.out.println(etc);
-			EtcinfoDBBean dbPro = EtcinfoDBBean.getInstance();
+			EtcinfoDBMybatis dbPro = EtcinfoDBMybatis.getInstance();
 			int chk=dbPro.deleteImg(etc); 
 
 			req.setAttribute("etc", etc);
@@ -761,6 +761,7 @@ import songBoard.SongDataBean;
 				 return  "/user/NewFile.jsp";
 			}
 		
+
 		public String songForm(HttpServletRequest req,
 				 HttpServletResponse res)  throws Throwable { 
 				

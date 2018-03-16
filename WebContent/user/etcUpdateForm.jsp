@@ -40,12 +40,12 @@
 <form name="f" method="post" enctype="multipart/form-data" action="etcUpdatePro">
 
  	<input type="hidden" name="etcid" value="${etcid}">
-  	
+
   	<table align="center" cellspacing="10" class="w3-card w3-round w3-white w3-padding-large" style="width:50%%;">
 
 	<tr>
       <td><b>프로필 이미지</b></td>
-      <td><input type="file" name="uploadfile" value="${etc.profilename}">${etc.profilename}</td>
+      <td><input type="file" name="uploadfile" value="/AllEars_Mybatis/profileSave/${etc.profilename}">${etc.profilename}</td>
 
     </tr>
     

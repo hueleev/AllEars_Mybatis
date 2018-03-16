@@ -22,7 +22,9 @@
 		
 	 -->
 		
-	
+		<select id="getPage" parameterType="hashmap" resultType="Song">
+			select * from songboard where sboardid =#{sboardid} order by snum desc
+		</select>
 		
 		
 		
