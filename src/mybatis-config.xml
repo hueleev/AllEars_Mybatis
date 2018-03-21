@@ -7,6 +7,7 @@
 		<typeAlias type="Userlist.EtcinfoDataBean" alias="Etc"/>
 		<typeAlias type="Userlist.TimeDataBean" alias="Time"/>
 		<typeAlias type="songBoard.SongDataBean" alias="Song"/>
+		<typeAlias type="guestMsg.GuestDataBean" alias="Msg"/>
 	</typeAliases>
 	
 	<environments default="development">
@@ -25,5 +26,6 @@
 		<mapper resource="User.xml"/>
 		<mapper resource="Etc.xml"/>
 		<mapper resource="Song.xml"/>
+		<mapper resource="Msg.xml"/>
 	</mappers>
 </configuration>

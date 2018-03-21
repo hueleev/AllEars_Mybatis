@@ -14,22 +14,41 @@
 			</if>
 		</select>
 		
-<!-- 		
-		<select id="getNextNumber"	resultType="int" >
-			select boardser.nextval from dual
-		</select>
 		
 		
-	 -->
+	
 		
 		<select id="getPage" parameterType="hashmap" resultType="Song">
 			select * from songboard where sboardid =#{sboardid} order by snum desc
 		</select>
 		
 		
+		<insert id="insertSong"	parameterType="Song">
+			insert into songBoard(sboardid, snum, stitle, genre, cfilename, cfilesize,
+				sfilename,sfilesize,sbio,sreg_date) 
+					values(#{sboardid},#{snum},#{stitle},#{genre},#{cfilename},#{cfilesize},#{sfilename},#{sfilesize},#{sbio},sysdate)
+		</insert>
 		
+		<select id="getSongCount" resultType="int">
+			select nvl(count(*),0) from songboard where sboardid =#{sboardid}
+		</select>
 		
+		<select id="getSongs" parameterType="hashmap" resultType="Song">
+			select * from (select rownum rnum,a.* from (select * from songboard where sboardid = #{sboardid} order by snum desc) 
+						a ) where rnum between #{startRow} and #{endRow}
+		</select>
 		
+		<select id="getSong" parameterType="hashmap" resultType="Song">
+			select * from songboard where snum = #{snum} and sboardid = #{sboardid}
+		</select>
+		
+		<update id="updateSong"	parameterType="Song">
+			update songboard set stitle=#{stitle},genre=#{genre},sbio=#{sbio} where snum=#{snum}
+		</update>
+		
+		<delete id="deleteSong" parameterType="hashmap">
+			delete from songboard where sboardid=#{sboardid} and snum=#{snum}
+		</delete>
 		
 </mapper>
 

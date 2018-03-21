@@ -23,9 +23,9 @@
     <thead>
       <tr class="w3-light-grey">
         <th align="center" width="100">번호</th>
-        <th align="center" width="400">타이틀</th>
+        <th align="center" width="300">타이틀</th>
         <th align="center" width="100">장르</th>
-        <th align="center" width="200">작성일</th>
+        <th align="center" width="300">작성일</th>
 
       </tr>
     </thead>
@@ -34,11 +34,11 @@
     <tr>
     	<td align="center" width="100">${number}</td>
 		<c:set var="number" value="${number-1}"/>
-      <td width="400">
+      <td width="300">
       <a href="songcontent?snum=${song.snum}&pageNum=${currentPage}&number=${number+1}&sboardid=${sboardid}">
       ${song.stitle}</a></td>
       <td width="100">${song.genre}</td>
-      <td width="200">${song.sreg_date}</td>
+      <td width="300">${song.sreg_date}</td>
     </tr> 
     </c:forEach>
     

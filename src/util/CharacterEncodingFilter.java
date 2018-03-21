@@ -26,7 +26,7 @@ public class CharacterEncodingFilter implements Filter{
 		// TODO Auto-generated method stub
 		encoding = config.getInitParameter("encoding");
 		if (encoding==null) {
-			encoding="euc-kr";
+			encoding="UTF-8";
 		}
 	}
 	

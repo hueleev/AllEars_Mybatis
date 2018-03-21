@@ -23,6 +23,7 @@ import Userlist.UserlistDBBean;
 import Userlist.UserlistDBMybatis;
 import Userlist.UserlistDataBean;
 import guestMsg.GuestDBBean;
+import guestMsg.GuestDBMybatis;
 import guestMsg.GuestDataBean;
 import songBoard.SongDBBean;
 import songBoard.SongDBMybatis;
@@ -698,6 +699,8 @@ import songBoard.SongDataBean;
 			
 			if (files.hasMoreElements()) { //占쏙옙占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙占� while占쏙옙 占쌕꾸몌옙 占실억옙占�!
 				String name = (String) files.nextElement();
+				
+			
 				profilename=multi.getFilesystemName(name);
 				String original = multi.getOriginalFileName(name); //占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙 占싱몌옙占쏙옙 占쏙옙占쏙옙 -
 				String type = multi.getContentType(name);
@@ -712,18 +715,24 @@ import songBoard.SongDataBean;
 			etc.setFacelink(multi.getParameter("facelink"));
 			etc.setInstalink(multi.getParameter("instalink"));
 			etc.setSoundlink(multi.getParameter("soundlink"));
-
+			
 
 			if (file!=null) {
 				etc.setProfilename(profilename);
 				etc.setProfilesize((int) file.length()); 
 			}
 			else {
+				
 				etc.setProfilename("");
 				etc.setProfilesize(0);
 			}
 			
-			
+			String name=req.getParameter("profilename");
+			String size=req.getParameter("profilesize");
+			String id=req.getParameter("etcid");
+			System.out.println(id);
+			System.out.println(name);
+			System.out.println(size);
 			
 			System.out.println(etc);
 			EtcinfoDBMybatis dbPro = EtcinfoDBMybatis.getInstance();
@@ -821,7 +830,7 @@ import songBoard.SongDataBean;
 			
 			
 			
-			SongDBBean dbPro = SongDBBean.getInstance(); 
+			SongDBMybatis dbPro = SongDBMybatis.getInstance(); 
 			
 			String ctype=".jpg";
 			
@@ -904,7 +913,7 @@ import songBoard.SongDataBean;
 			List songList = null;
 			
 			
-			SongDBBean dbPro = SongDBBean.getInstance();
+			SongDBMybatis dbPro = SongDBMybatis.getInstance();
 			
 			HttpSession session=req.getSession();
 			
@@ -957,7 +966,7 @@ import songBoard.SongDataBean;
 				
 				 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm");
 				 try { 
-					SongDBBean dbPro = SongDBBean.getInstance();
+					SongDBMybatis dbPro = SongDBMybatis.getInstance();
 				 	SongDataBean song = dbPro.getSong(snum, sboardid);
 				 
 				 	req.setAttribute("song", song); 	
@@ -982,7 +991,7 @@ import songBoard.SongDataBean;
 	
 
 			 try{
-				 SongDBBean dbPro = SongDBBean.getInstance();
+				 SongDBMybatis dbPro = SongDBMybatis.getInstance();
 				 SongDataBean song = dbPro.getSong(snum, sboardid);
 
 				 req.setAttribute("song", song);
@@ -1014,7 +1023,7 @@ import songBoard.SongDataBean;
 			
 		
 			System.out.println(song);
-			SongDBBean dbPro = SongDBBean.getInstance();
+			SongDBMybatis dbPro = SongDBMybatis.getInstance();
 			int chk=dbPro.updateSong(song); 
 
 			req.setAttribute("song", song);
@@ -1036,7 +1045,7 @@ import songBoard.SongDataBean;
 			String pageNum = req.getParameter("pageNum");
 			String sboardid = req.getParameter("sboardid");
 		
-			SongDBBean dbPro = SongDBBean.getInstance();
+			SongDBMybatis dbPro = SongDBMybatis.getInstance();
 		 	SongDataBean song = dbPro.getSong(snum,sboardid);
 			
 		 	req.setAttribute("snum",snum);
@@ -1060,7 +1069,7 @@ import songBoard.SongDataBean;
 			 int snum = Integer.parseInt(req.getParameter("snum"));
 			 String sboardid=req.getParameter("sboardid");
 			 String passwd = req.getParameter("passwd");
-			 SongDBBean dbPro = SongDBBean.getInstance();
+			 SongDBMybatis dbPro = SongDBMybatis.getInstance();
 
 			 
 			 int check = -1;
@@ -1151,7 +1160,7 @@ import songBoard.SongDataBean;
 				msg.setWriter(req.getParameter("writer"));
 			System.out.println(msg);
 			
-			GuestDBBean dbPro=GuestDBBean.getInstance();
+			GuestDBMybatis dbPro=GuestDBMybatis.getInstance();
 			dbPro.insertMsg(msg);
 			
 			req.setAttribute("pageNum", pageNum);
@@ -1183,7 +1192,7 @@ import songBoard.SongDataBean;
 				int count=0;
 				int number =0;
 				List msgList = null;
-				GuestDBBean dbPro = GuestDBBean.getInstance();
+				GuestDBMybatis dbPro = GuestDBMybatis.getInstance();
 				count = dbPro.getMsgCount(gboardid);
 				if (count >0) {
 					msgList = dbPro.getMsgs(startRow, endRow, gboardid);}
@@ -1233,7 +1242,7 @@ import songBoard.SongDataBean;
 				
 			 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm");
 			 try { 
-				GuestDBBean dbPro = GuestDBBean.getInstance();
+				GuestDBMybatis dbPro = GuestDBMybatis.getInstance();
 				GuestDataBean msg = dbPro.getMsg(gnum, gboardid,"content");
 				int ref=msg.getRef(); 
 				int re_step=msg.getRe_step();
@@ -1285,7 +1294,7 @@ import songBoard.SongDataBean;
 			String passwd = req.getParameter("passwd");
 			String spasswd=(String) session.getAttribute("sessionpasswd");
 			
-			GuestDBBean dbPro = GuestDBBean.getInstance();
+			GuestDBMybatis dbPro = GuestDBMybatis.getInstance();
 			
 			int chk=-1;
 			
@@ -1324,7 +1333,7 @@ import songBoard.SongDataBean;
 			int gnum = Integer.parseInt (req.getParameter("gnum"));
 			
 			try {
-				GuestDBBean dbPro = GuestDBBean.getInstance();
+				GuestDBMybatis dbPro = GuestDBMybatis.getInstance();
 				GuestDataBean msg = dbPro.getMsg(gnum,gboardid,"update");
 				
 				req.setAttribute("msg", msg);
@@ -1367,7 +1376,7 @@ import songBoard.SongDataBean;
 
 				System.out.println(msg);
 				
-				GuestDBBean dbPro = GuestDBBean.getInstance(); 
+				GuestDBMybatis dbPro = GuestDBMybatis.getInstance(); 
 
 				int chk=dbPro.updateMsg(msg);
 				req.setAttribute("pageNum", pageNum);

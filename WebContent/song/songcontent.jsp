@@ -73,7 +73,7 @@
 				<c:if test="${sessionScope.sessionid eq song.sboardid}">
 				 
 				  
-				   <input class="w3-btn w3-round w3-dark-grey w3-hover-white w3-border w3-border-deep-purple"
+				   <input class="w3-btn w3-round w3-dark-grey w3-hover-white"
 				   type="button" value="수정"
 				   onclick="document.location.href='songUpdateForm?snum=${song.snum}&pageNum=${pageNum}'">
 				   &nbsp;&nbsp;&nbsp;&nbsp;

@@ -54,11 +54,11 @@ public class UserlistDBMybatis extends MybatisConnector {
 	}*/
 	
 	public void insertUser(UserlistDataBean user) {
-		sqlSession = sqlSession();
-
-		
-		int number=sqlSession.selectOne(namespace+".getNextNumber",user);
-		
+			sqlSession = sqlSession();
+	
+			
+			int number=sqlSession.selectOne(namespace+".getNextNumber",user);
+			
 			user.setNum(number);
 						
 			
